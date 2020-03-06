@@ -39,6 +39,10 @@ class Opus(db.Model):
         self.text_short = text_short
         self.conf = conf
 
+    @classmethod
+    def hits(cls):
+        return format(cls.query.count()/100000, '.5f')
+
 
 @app.route('/')
 def index():
@@ -53,7 +57,7 @@ def index():
     db.session.commit()
 
     return render_template('generator.html', title='Hlavně neblábolit',
-                           opus=opus, hits=Opus.query.count()/100000)
+                           opus=opus, hits=Opus.hits())
 
 
 @app.errorhandler(404)
@@ -65,7 +69,7 @@ def page_not_found(error):
 def permalink(hash):
     opus = Opus.query.filter_by(id=hash).first_or_404()
     return render_template('generator.html', title='Hlavně neblábolit',
-                           opus=opus, hits=Opus.query.count()/100000)
+                           opus=opus, hits=Opus.hits())
 
 
 if __name__ == '__main__':
