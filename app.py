@@ -42,7 +42,7 @@ class Opus(db.Model):
 
 @app.route('/')
 def index():
-    mixer = int(request.args.get('mixer') or 0)
+    mixer = int(request.args.get('mixer') or 1)
     model = MODEL_MIXER[mixer]
 
     tlong = generate(model, items=20, separator=' ')
