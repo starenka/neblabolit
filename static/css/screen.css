@@ -1,0 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Crimson+Text);
+
+body { margin: 20px; font-family: 'Crimson Text', serif; font-size: 17px;}
+p { text-align: justify; }
+h3 { margin-bottom: 8px; }
+
+#credits { font-size: 70%; text-align: right; margin-top: 30px; }
+#hits { font-size: 120%; font-weight: bold; }
+input { margin-right: 5px;}
