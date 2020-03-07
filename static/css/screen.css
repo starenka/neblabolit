@@ -1,5 +1,6 @@
 body { margin: 20px; font-family: 'Crimson Text', serif; font-size: 17px;}
 p { text-align: justify; }
+p.help { font-size: 80%; font-style: italic; }
 h3 { margin-bottom: 8px; }
 
 #credits { font-size: 70%; text-align: right; margin-top: 30px; }

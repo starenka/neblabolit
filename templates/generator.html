@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <form action=/>
   <label for="mixer">Andrej</label>
   <input type="range" name="mixer" min="1" max="5" value="{{ opus.conf.mixer }}" step="1">
   <label for="mixer">Mára</label>
   <input type="submit">
 </form>
+
+<p class="help">
+	Namíchejte si poměr Andreje a <a href="https://static.novydenik.com/2019/08/P201710210789001.jpg" taget="_blank">Máry</a> dle vastních představ.
+	V krajních polohách jsou sami sebou. <br/>
+</p>
 
 <h3>Kamkoliv:</h3>
 <p>{{ opus.text_long|safe }}</p>
