@@ -8,7 +8,7 @@ body {
 }
 
 p { text-align: justify; }
-p.help { font-size: 70%; font-style: itxalic; margin-bottom: 50px;}
+p.help { font-size: 70%; font-style: italic; margin-bottom: 50px;}
 h3 { margin-bottom: 8px; }
 
 input { margin: auto 6px;}
@@ -16,4 +16,3 @@ input[type=submit] { margin-left: 10px; }
 
 #credits { font-size: 70%; text-align: right; margin-top: 30px; }
 #hits { font-size: 120%; font-weight: bold; }
-input { margin-right: 5px;}
