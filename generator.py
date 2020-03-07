@@ -7,8 +7,8 @@ HERE = pathlib.Path(__file__).parent.resolve()
 
 
 def get_corpus(fname):
-    text = open(HERE / 'data' / fname).read()
-    return text.replace('***', '')
+    with open(HERE / 'data' / fname) as fh:
+        return fh.read()
 
 
 def train_model(fname, state_size=2, compile=False):
