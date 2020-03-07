@@ -4,4 +4,4 @@ markovify~=0.8.0
 psycopg2~=2.8.4
     
 uwsgi~=2.0.18
-fabric3~=1.14.post1    
+fabric3~=1.14.post1
