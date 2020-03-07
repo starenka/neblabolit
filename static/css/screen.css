@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Crimson+Text);
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
 
 body { margin: 20px; font-family: 'Crimson Text', serif; font-size: 17px;}
 p { text-align: justify; }
