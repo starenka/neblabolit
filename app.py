@@ -50,7 +50,7 @@ def index():
     mixer = int(request.args.get('mixer') or 1)
     model = MODEL_MIXER[mixer]
 
-    tlong = generate(model, items=15, separator=' ')
+    tlong = generate(model, items=20, separator=' ')
     tshort = generate(model, items=12, separator='\n', max_chars=140)
 
     opus = Opus(conf=dict(mixer=mixer), text_long=tlong, text_short=tshort)
