@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 # coding=utf-8
+
 from fabric.api import env, hide
 from fabric.decorators import task
 from fabric.operations import run
