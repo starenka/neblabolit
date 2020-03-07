@@ -5,14 +5,14 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import JSON
 
-import settings
-
 from generator import train_model, combined_model, generate
+import settings
 
 MODELS = dict(andrej=train_model('andrej'), mara=train_model('caulidi'))
 MODELS['andrej1mara0'] = combined_model((MODELS['andrej'], MODELS['mara']), (3, 1))
 MODELS['andrejmara'] = combined_model((MODELS['mara'], MODELS['andrej']), (1, 1))
 MODELS['mara1andrej0'] = combined_model((MODELS['mara'], MODELS['andrej']), (3, 1))
+MODELS = {n: m.compile(inplace=True) for n, m in MODELS.items()}
 
 MODEL_MIXER = {1: MODELS['andrej'],
                2: MODELS['andrej1mara0'],
