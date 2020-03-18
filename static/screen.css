@@ -16,7 +16,7 @@ input[type=submit] { margin-left: 10px; }
 
 #credits { font-size: 70%; text-align: right; margin-top: 30px; }
 #hits { font-size: 120%; font-weight: bold; }
-#promo { position: absolute; top: 20px; right: 10px; }
+#promo { position: absolute; top: 10px; right: 10px; }
 
 @-webkit-keyframes blinker {
   from {opacity: 1.0;}
