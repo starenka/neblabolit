@@ -82,7 +82,7 @@ def permalink(hash):
     opus = Opus.query.filter_by(id=hash).first_or_404()
     template = 'generator' if not 'korona' in opus.conf else 'korona'
     return render_template('%s.html' % template,
-                           title=min(opus.text_short.split('\n'), key=len),
+                           title=min(opus.text_short.split('\n'), key=len).rstrip('.'),
                            opus=opus, hits=Opus.hits())
 
 
