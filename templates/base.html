@@ -8,12 +8,14 @@
 </head>
 <body>
     <h1>{{ title }}</h1>
+	<div id="promo">{% block promo %}{% endblock %}</div>
+	
     <div id="content">
         {% block content %}{% endblock %}
         <div id="credits">
-            text <a href="https://www.psp.cz/eknih/2017ps/" target="_blank">psp.cz</a> a Facebook, 
+            text <a href="https://www.psp.cz/eknih/2017ps/" target="_blank">psp.cz</a>, <a href="https://www.hlidacstatu.cz/data/Hledat/tiskove-konference-vlady?Q=osobaid%3Aandrej-babis&order=datum desc" target="_blank">Hlídač Státu</a> a Facebook, 
             prgačina <a href="https://github.com/starenka/neblabolit/" target="_blank">starenka</a> L.P. MMXX</br>
-            Už jsme vytunelovali <span id="hits">{{ hits or 100 }}%</span> republiky.
+            Už jsme {% block hits %}{% endblock %} <span id="hits">{{ hits or 100 }}%</span> republiky.
         </div>
     </div>
 </body>

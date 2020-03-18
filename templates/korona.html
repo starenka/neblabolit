@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block promo %}<a href="/">Andrej a Mára klasik</a>{% endblock %}
+
+{% block content %}
+	<form action=/korona>
+	  <input type="submit" value="Vyřešit">
+	</form>
+
+	<h3>Tiskovka</h3>
+	<p>{{ opus.text_long|safe }}</p>
+
+	<h3>Na zvídavou otázku</h3>
+	<p>{{ opus.text_short|replace("\n", "<br/>")|safe }}</p>
+
+	<a href="/permalink/{{ opus.id }}">[ oblibovat ]</a>
+{% endblock %}
+
+{% block hits %}otestovali{% endblock %}

@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
+
+{% block promo %}<a class="blink" href="/korona">KORONAVIRUS !!!</a>{% endblock %}
+
 {% block content %}
+	<form action=/>
+	  <label for="mixer">Andrej</label>
+	  <input type="range" name="mixer" min="1" max="5" value="{{ opus.conf.mixer }}" step="1">
+	  <label for="mixer">Mára</label>
+	  <input type="submit" value="Vyblábol">
+	</form>
 
-<form action=/>
-  <label for="mixer">Andrej</label>
-  <input type="range" name="mixer" min="1" max="5" value="{{ opus.conf.mixer }}" step="1">
-  <label for="mixer">Mára</label>
-  <input type="submit" value="Vyblábol">
-</form>
+	<p class="help">
+		Namíchejte si poměr Andreje a <a href="https://static.novydenik.com/2019/08/P201710210789001.jpg" target="_blank">Máry</a> dle vastních představ.
+		V krajních polohách jsou sami sebou. <br/>
+	</p>
 
-<p class="help">
-	Namíchejte si poměr Andreje a <a href="https://static.novydenik.com/2019/08/P201710210789001.jpg" target="_blank">Máry</a> dle vastních představ.
-	V krajních polohách jsou sami sebou. <br/>
-</p>
+	<h3>Kamkoliv</h3>
+	<p>{{ opus.text_long|safe }}</p>
 
-<h3>Kamkoliv</h3>
-<p>{{ opus.text_long|safe }}</p>
+	<h3>Pod selfíčko</h3>
+	<p>{{ opus.text_short|replace("\n", "<br/>")|safe }}</p>
 
-<h3>Pod selfíčko</h3>
-<p>{{ opus.text_short|replace("\n", "<br/>")|safe }}</p>
-
-<a href="/permalink/{{ opus.id }}">[ oblibovat ]</a>
+	<a href="/permalink/{{ opus.id }}">[ oblibovat ]</a>
 {% endblock %}
+
+{% block hits %}vytunelovali{% endblock %}
