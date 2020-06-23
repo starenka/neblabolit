@@ -22,6 +22,8 @@ MODEL_MIXER = {1: MODELS['andrej'],
                5: MODELS['mara'],
                100: MODELS['andrej_korona'],
                }
+DEFAULT_MODEL = 1
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.DB
@@ -48,7 +50,9 @@ class Opus(db.Model):
 
 @app.route('/')
 def index():
-    mixer = int(request.args.get('mixer', 1))
+    mixer = int(request.args.get('mixer', DEFAULT_MODEL))
+    if mixer not in MODEL_MIXER:
+        mixer = DEFAULT_MODEL
     model = MODEL_MIXER[mixer]
 
     tlong = generate(model, items=20, separator=' ')
