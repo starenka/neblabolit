@@ -50,10 +50,11 @@ class Opus(db.Model):
 
 @app.route('/')
 def index():
-    mixer = int(request.args.get('mixer', DEFAULT_MODEL))
-    if mixer not in MODEL_MIXER:
-        mixer = DEFAULT_MODEL
-    model = MODEL_MIXER[mixer]
+    try:
+        mixer = int(request.args.get('mixer'))
+        model = MODEL_MIXER[mixer]
+    except:
+        mixer, model = DEFAULT_MODEL, MODEL_MIXER[DEFAULT_MODEL]
 
     tlong = generate(model, items=20, separator=' ')
     tshort = generate(model, items=12, separator='\n', max_chars=140)
