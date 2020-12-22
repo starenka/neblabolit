@@ -88,7 +88,7 @@ def korona():
 def dadaiku():
     model = MODELS['andrej_korona']
 
-    text = generate(model, items=100, separator=' ')
+    text = generate(model, items=200, separator=' ')
     lines = [line.lower() for line in haiku(text, CS_SPACY_W_SYLLABES)]
 
     opus = Opus(conf=dict(dadaiku=True), text_short='\n'.join(lines), text_long='')
