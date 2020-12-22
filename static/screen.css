@@ -13,10 +13,12 @@ h3 { margin-bottom: 8px; }
 
 input { margin: auto 6px;}
 input[type=submit] { margin-left: 10px; }
+input[type=submit]:hover { cursor: pointer; }
 
 #credits { font-size: 70%; text-align: right; margin-top: 30px; }
 #hits { font-size: 120%; font-weight: bold; }
 #promo { position: absolute; top: 10px; right: 10px; }
+#content.dadaiku {width:300px; margin: 0 auto; }
 
 @-webkit-keyframes blinker {
   from {opacity: 1.0;}

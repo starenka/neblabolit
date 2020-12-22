@@ -1,7 +1,9 @@
 flask~=1.1.1  
 flask-sqlalchemy~=2.4.1  
-markovify~=0.8.0  
-psycopg2~=2.8.4
-    
+markovify~=0.8.0
+spacy-udpipe~=0.3.2
+spacy-syllables~=1.0.0
+   
+psycopg2~=2.8.4        
 uwsgi~=2.0.18
 fabric3~=1.14.post1

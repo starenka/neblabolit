@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import JSON
 
 from generator import train_model, combined_model, generate
+from haiku import _init, haiku
 import settings
 
 MODELS = dict(andrej=train_model('andrej'), mara=train_model('caulidi'),
@@ -23,6 +24,7 @@ MODEL_MIXER = {1: MODELS['andrej'],
                100: MODELS['andrej_korona'],
                }
 DEFAULT_MODEL = 1
+CS_SPACY_W_SYLLABES = _init()
 
 
 app = Flask(__name__)
@@ -49,7 +51,7 @@ class Opus(db.Model):
 
 
 @app.route('/')
-def index():
+def klasik():
     try:
         mixer = int(request.args.get('mixer'))
         model = MODEL_MIXER[mixer]
@@ -63,7 +65,7 @@ def index():
     db.session.add(opus)
     db.session.commit()
 
-    return render_template('generator.html', title='Hlavně neblábolit',
+    return render_template('klasik.html', title='Hlavně neblábolit',
                            opus=opus, hits=Opus.hits())
 
 
@@ -82,12 +84,33 @@ def korona():
                            opus=opus, hits=Opus.hits())
 
 
+@app.route('/dadaiku')
+def dadaiku():
+    model = MODELS['andrej_korona']
+
+    text = generate(model, items=100, separator=' ')
+    lines = [line.lower() for line in haiku(text, CS_SPACY_W_SYLLABES)]
+
+    opus = Opus(conf=dict(dadaiku=True), text_short='\n'.join(lines), text_long='')
+    db.session.add(opus)
+    db.session.commit()
+
+    return render_template('dadaiku.html', title='Dadaiku', template='dadaiku',
+                           opus=opus, hits=Opus.hits())
+
+
 @app.route('/permalink/<hash>')
 def permalink(hash):
     opus = Opus.query.filter_by(id=hash).first_or_404()
-    template = 'generator' if not 'korona' in opus.conf else 'korona'
+    template = 'klasik'
+    if 'dadaiku' in opus.conf:
+        template = 'dadaiku'
+    elif 'korona' in opus.conf:
+        template = 'korona'
+
     return render_template('%s.html' % template,
-                           title=min(opus.text_short.split('\n'), key=len).rstrip('.'),
+                           template=template,
+                           title=min(opus.text_short.split('\n'), key=len).rstrip('.').capitalize(),
                            opus=opus, hits=Opus.hits())
 
 
