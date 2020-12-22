@@ -17,10 +17,12 @@ def production():
 
 
 @task
-def deploy():
+def deploy(full=True):
     with cd(env.project_dir):
         with hide('stdout'):
             run('git fetch')
             run('git reset --hard origin/%s' % env.branch)
-        run('.env/bin/pip install -r requirements.pip')
-        run('sudo supervisorctl restart neblabolit.starenka.net')
+
+        if full in ('y', 'yes', True, 1):
+            run('.env/bin/pip install -r requirements.pip')
+            run('sudo supervisorctl restart neblabolit.starenka.net')
