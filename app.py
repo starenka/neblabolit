@@ -102,6 +102,8 @@ def dadaiku():
 @app.route('/permalink/<hash>')
 def permalink(hash):
     opus = Opus.query.filter_by(id=hash).first_or_404()
+    title = min(opus.text_short.split('\n'), key=len).rstrip('.').capitalize()
+
     template = 'klasik'
     if 'dadaiku' in opus.conf:
         template = 'dadaiku'
@@ -110,7 +112,7 @@ def permalink(hash):
 
     return render_template('%s.html' % template,
                            template=template,
-                           title=min(opus.text_short.split('\n'), key=len).rstrip('.').capitalize(),
+                           title=title,
                            opus=opus, hits=Opus.hits())
 
 
