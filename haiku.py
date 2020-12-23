@@ -31,30 +31,26 @@ def haiku(text, nlp=None):
                 {'IS_ASCII': True, 'IS_PUNCT': False, 'IS_SPACE': False},
                 {'POS':  {'IN': ['NOUN', 'VERB', 'ADJ', 'ADV']}}]
 
-    matcher2.add('3w', None, pattern2)
     matcher1.add('2w', None, pattern1)
+    matcher2.add('3w', None, pattern2)
     matcher3.add('4w', None, pattern3)
 
     doc = nlp(text)
+    matches = matcher1(doc) + matcher2(doc) + matcher3(doc)
 
-    matches1, matches2, matches3 = matcher1(doc), matcher2(doc), matcher3(doc)
-    g_5, g_7 = [], []
+    s5, s7 = set(), set()
+    for mid, mstart, mend in matches:
+        # "group of words" matching any of the patterns
+        span = doc[mstart:mend]
 
-    for match_id, start, end in matches1 + matches2 + matches3:
-        span = doc[start:end]
+        # get count of syllables for the whole span
+        syl_count = sum(getattr(t._, 'syllables_count', 0) for t in span)
+        if syl_count == 5:
+            s5.add(span.text)
+        elif syl_count == 7:
+            s7.add(span.text)
 
-        syl_count = 0
-        for token in span:
-            sc = token._.syllables_count
-            if not sc:
-                continue
+    s5, s7 = tuple(s5), tuple(s7)
 
-            syl_count += sc
-            if syl_count == 5:
-                if span.text not in g_5:
-                    g_5.append(span.text)
-            if syl_count == 7:
-                if span.text not in g_7:
-                    g_7.append(span.text)
-
-    return random.choice(g_5), random.choice(g_7), random.choice(g_5)
+    # haiku is 17 sylls, 5-7-5, words or lines can repeat
+    return random.choice(s5), random.choice(s7), random.choice(s5)
