@@ -44,7 +44,8 @@ def haiku(text, nlp=None):
         span = doc[mstart:mend]
 
         # get count of syllables for the whole span
-        syl_count = sum(getattr(t._, 'syllables_count', 0) for t in span)
+        # if we can't caount the syllables, skip
+        syl_count = sum(t._syllables_count or 100 for t in span)
         if syl_count == 5:
             s5.add(span.text)
         elif syl_count == 7:
