@@ -20,7 +20,7 @@ def _init(lang='cs', download_model=None):
 def haiku(text, nlp=None):
     nlp = nlp or _init()
 
-    matcher1, matcher2, matcher3 = Matcher(nlp.vocab), Matcher(nlp.vocab), Matcher(nlp.vocab)
+    m1, m2, m3 = Matcher(nlp.vocab), Matcher(nlp.vocab), Matcher(nlp.vocab)
     pattern1 = [{'POS':  {'IN': ['NOUN', 'ADP', 'ADJ', 'ADV']}},
                 {'POS':  {'IN': ['NOUN', 'VERB']}}]
     pattern2 = [{'POS':  {'IN': ['NOUN', 'ADP', 'ADJ', 'ADV']}},
@@ -31,12 +31,12 @@ def haiku(text, nlp=None):
                 {'IS_ASCII': True, 'IS_PUNCT': False, 'IS_SPACE': False},
                 {'POS':  {'IN': ['NOUN', 'VERB', 'ADJ', 'ADV']}}]
 
-    matcher1.add('2w', None, pattern1)
-    matcher2.add('3w', None, pattern2)
-    matcher3.add('4w', None, pattern3)
+    m1.add('2w', None, pattern1)
+    m2.add('3w', None, pattern2)
+    m3.add('4w', None, pattern3)
 
     doc = nlp(text)
-    matches = matcher1(doc) + matcher2(doc) + matcher3(doc)
+    matches = m1(doc) + m2(doc) + m3(doc)
 
     s5, s7 = set(), set()
     for mid, mstart, mend in matches:
